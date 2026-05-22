@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xavi Cros · Plan Entrenamiento · RealShift</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro: #0D0D0D;
+    --blanco: #FFFFFF;
+    --gris1: #1C1C1C;
+    --gris2: #2E2E2E;
+    --gris3: #F2F2F2;
+    --gris4: #888888;
+    --azul: #1A3A6B;
+    --azul-clr: #EAF0F8;
+    --azul-mid: #2E5BA8;
+    --rojo: #C0392B;
+    --rojo-clr: #FDECEA;
+    --verde: #1A6B3C;
+    --verde-clr: #EAF5EE;
+    --naranja: #B8520A;
+    --naranja-clr: #FDF3EA;
+    --amarillo: #FFF9C4;
+    --gris-acc: #ECF0F1;
+    --gris-s: #5D6D7E;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--negro);
+    color: var(--blanco);
+    min-height: 100vh;
+  }
+
+  /* ── PORTADA ── */
+  .portada {
+    background: var(--negro);
+    padding: 0;
+    border-bottom: 3px solid var(--azul);
+  }
+
+  .portada-header {
+    background: linear-gradient(135deg, var(--negro) 0%, var(--gris1) 100%);
+    padding: 40px 48px 32px;
+    border-bottom: 1px solid var(--gris2);
+  }
+
+  .brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gris4);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .portada-titulo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--blanco);
+    margin-bottom: 6px;
+  }
+
+  .portada-titulo span { color: var(--azul-mid); }
+
+  .portada-sub {
+    font-size: 13px;
+    color: var(--gris4);
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+  }
+
+  .ficha-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--gris2);
+    border: 1px solid var(--gris2);
+  }
+
+  .ficha-item {
+    background: var(--gris1);
+    padding: 14px 18px;
+  }
+
+  .ficha-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gris4);
+    margin-bottom: 4px;
+  }
+
+  .ficha-valor {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--blanco);
+  }
+
+  .ficha-valor.verde  { color: #4CAF82; }
+  .ficha-valor.azul   { color: #6BA3E8; }
+  .ficha-valor.rojo   { color: #E57373; }
+  .ficha-valor.naranja{ color: #FFB74D; }
+
+  /* ── ALERTA LCA ── */
+  .alerta-lca {
+    background: var(--verde-clr);
+    border-left: 4px solid var(--verde);
+    padding: 12px 48px;
+    font-size: 12px;
+    color: var(--verde);
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── PARAMETROS FASE ── */
+  .params-banda {
+    background: var(--azul);
+    padding: 10px 48px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .params-banda strong { color: var(--blanco); }
+
+  /* ── LAYOUT DÍAS ── */
+  .dias-container {
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2px;
+    background: var(--gris2);
+  }
+
+  .dia-card {
+    background: var(--negro);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* ── HEADER DÍA ── */
+  .dia-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--gris2);
+  }
+
+  .dia-A .dia-header { background: var(--azul); }
+  .dia-B .dia-header { background: var(--naranja); }
+  .dia-C .dia-header { background: var(--rojo); }
+
+  .dia-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1;
+    color: rgba(255,255,255,0.15);
+    position: absolute;
+    right: 24px;
+    top: 12px;
+  }
+
+  .dia-header { position: relative; }
+
+  .dia-etiqueta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+  }
+
+  .dia-titulo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--blanco);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .dia-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .dia-meta-item {
+    font-size: 10px;
+    background: rgba(0,0,0,0.25);
+    color: rgba(255,255,255,0.9);
+    padding: 3px 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── BLOQUE BÁSICOS / ACCESORIOS ── */
+  .bloque-header {
+    padding: 8px 24px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .bloque-basicos { background: var(--gris1); color: var(--gris4); }
+  .bloque-accesorios { background: var(--gris2); color: var(--gris4); }
+
+  /* ── EJERCICIO ROW ── */
+  .ejercicio {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid #1a1a1a;
+    min-height: 52px;
+    transition: background 0.15s;
+  }
+
+  .ejercicio:hover { background: rgba(255,255,255,0.03); }
+
+  .ejercicio.basico   { border-left: 3px solid transparent; }
+  .dia-A .ejercicio.basico   { border-left-color: var(--azul-mid); }
+  .dia-B .ejercicio.basico   { border-left-color: var(--naranja); }
+  .dia-C .ejercicio.basico   { border-left-color: var(--rojo); }
+
+  .ejercicio.accesorio { border-left: 3px solid var(--gris-s); }
+
+  .ej-tipo {
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 9px;
+    letter-spacing: 1px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 8px 0;
+  }
+
+  .ejercicio.basico   .ej-tipo { color: var(--gris4); background: rgba(255,255,255,0.03); }
+  .ejercicio.accesorio .ej-tipo { color: var(--gris-s); background: rgba(255,255,255,0.02); }
+
+  .ej-info {
+    padding: 10px 14px;
+    flex: 1;
+  }
+
+  .ej-nombre {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--blanco);
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+
+  .ejercicio.accesorio .ej-nombre { color: #B0B8C1; }
+
+  .ej-nota {
+    font-size: 10px;
+    color: var(--gris4);
+    line-height: 1.3;
+  }
+
+  .ej-series {
+    padding: 0 10px;
+    text-align: center;
+    min-width: 40px;
+  }
+
+  .ej-series-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .dia-A .ejercicio.basico   .ej-series-num { color: var(--azul-mid); }
+  .dia-B .ejercicio.basico   .ej-series-num { color: var(--naranja); }
+  .dia-C .ejercicio.basico   .ej-series-num { color: var(--rojo); }
+  .ejercicio.accesorio .ej-series-num { color: var(--gris4); }
+
+  .ej-series-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--gris4);
+    text-transform: uppercase;
+  }
+
+  .ej-reps {
+    padding: 0 10px;
+    text-align: center;
+    min-width: 60px;
+    border-left: 1px solid #1a1a1a;
+    border-right: 1px solid #1a1a1a;
+  }
+
+  .ej-reps-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--blanco);
+    line-height: 1;
+  }
+
+  .ejercicio.accesorio .ej-reps-num { color: #B0B8C1; }
+
+  .ej-reps-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--gris4);
+    text-transform: uppercase;
+  }
+
+  .ej-params {
+    padding: 8px 12px;
+    min-width: 80px;
+    text-align: right;
+  }
+
+  .ej-rpe {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--azul-mid);
+    margin-bottom: 2px;
+  }
+
+  .ejercicio.accesorio .ej-rpe { color: var(--gris4); }
+
+  .ej-descanso {
+    font-size: 9px;
+    color: var(--gris4);
+  }
+
+  /* ── CARGA INPUT ── */
+  .ej-carga-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: #111;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .ej-carga-item {
+    background: var(--negro);
+    padding: 5px 8px;
+    text-align: center;
+  }
+
+  .ej-carga-sem {
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--gris4);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .ej-carga-input {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .ej-carga-input input {
+    width: 38px;
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    color: var(--blanco);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    padding: 2px 4px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .ej-carga-input input:focus { border-color: var(--azul-mid); }
+  .ej-carga-input input::placeholder { color: #333; font-size: 9px; }
+
+  .input-label {
+    font-size: 8px;
+    color: #333;
+    align-self: center;
+  }
+
+  /* ── PIE DE SESIÓN ── */
+  .dia-footer {
+    padding: 12px 24px;
+    background: var(--gris1);
+    font-size: 10px;
+    color: var(--gris4);
+    border-top: 1px solid var(--gris2);
+  }
+
+  .dia-footer strong { color: var(--verde); }
+
+  /* ── LEYENDA RPE ── */
+  .rpe-banda {
+    background: var(--gris1);
+    padding: 16px 48px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-top: 2px solid var(--verde);
+  }
+
+  .rpe-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rpe-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--blanco);
+    min-width: 24px;
+  }
+
+  .rpe-desc {
+    font-size: 11px;
+    color: var(--gris4);
+  }
+
+  /* ── PROGRESION REGLA ── */
+  .regla-progresion {
+    background: var(--verde);
+    padding: 14px 48px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--blanco);
+    text-align: center;
+  }
+
+  /* ── SEGUIMIENTO ── */
+  .seguimiento-section {
+    padding: 40px 48px;
+    background: var(--negro);
+    border-top: 3px solid var(--azul);
+  }
+
+  .section-titulo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blanco);
+    margin-bottom: 4px;
+  }
+
+  .section-sub {
+    font-size: 11px;
+    color: var(--gris4);
+    margin-bottom: 24px;
+  }
+
+  .seguimiento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 2px;
+    background: var(--gris2);
+    margin-bottom: 2px;
+  }
+
+  .seg-header-item {
+    background: var(--gris1);
+    padding: 8px 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gris4);
+    font-weight: 700;
+  }
+
+  .seguimiento-rows { display: flex; flex-direction: column; gap: 2px; background: var(--gris2); }
+
+  .seg-row {
+    display: grid;
+    grid-template-columns: 80px 100px repeat(7, 1fr) 1fr;
+    gap: 2px;
+    background: var(--gris2);
+  }
+
+  .seg-cell {
+    background: var(--negro);
+    padding: 8px 10px;
+  }
+
+  .seg-cell input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #2a2a2a;
+    color: var(--blanco);
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
+    padding: 2px 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .seg-cell input:focus { border-bottom-color: var(--azul-mid); }
+  .seg-cell input::placeholder { color: #333; font-size: 11px; }
+
+  .seg-cell.sem-label {
+    background: var(--gris1);
+    display: flex;
+    align-items: center;
+  }
+
+  .seg-cell.sem-label span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gris4);
+  }
+
+  .seg-cell.peso-cell input { color: #FFB74D; font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .portada-header, .params-banda, .rpe-banda, .regla-progresion,
+    .seguimiento-section { padding-left: 20px; padding-right: 20px; }
+    .dias-container { padding: 20px; }
+    .alerta-lca { padding-left: 20px; padding-right: 20px; }
+    .ej-carga-row { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .dias-container { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
+    .dia-card { border: 1px solid #ccc; }
+    .ej-carga-row { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── PORTADA ────────────────────────────────────────────────────────────── -->
+<div class="portada">
+  <div class="portada-header">
+    <div class="brand">RealShift · Asesoría Personal</div>
+    <div class="portada-titulo">Xavi Cros <span>Rodríguez</span></div>
+    <div class="portada-sub">Plan de Entrenamiento Personalizado · Fase BUILD</div>
+
+    <div class="ficha-grid">
+      <div class="ficha-item">
+        <div class="ficha-label">Edad</div>
+        <div class="ficha-valor">30 años</div>
+      </div>
+      <div class="ficha-item">
+        <div class="ficha-label">Altura</div>
+        <div class="ficha-valor">176 cm</div>
+      </div>
+      <div class="ficha-item">
+        <div class="ficha-label">Fase</div>
+        <div class="ficha-valor verde">BUILD</div>
+      </div>
+      <div class="ficha-item">
+        <div class="ficha-label">Estructura</div>
+        <div class="ficha-valor azul">Fullbody · F3</div>
+      </div>
+      <div class="ficha-item">
+        <div class="ficha-label">Duración sesión</div>
+        <div class="ficha-valor">~60-75 min</div>
+      </div>
+      <div class="ficha-item">
+        <div class="ficha-label">Objetivo</div>
+        <div class="ficha-valor naranja">Fuerza · Funcionalidad</div>
+      </div>
+      <div class="ficha-item">
+        <div class="ficha-label">Asesor</div>
+        <div class="ficha-valor rojo">RealShift</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alerta-lca">
+    ✓ LCA RECUPERADO — Sin restricciones de rodilla · Control técnico estándar · Sin valgo dinámico en ejercicios unilaterales
+  </div>
+
+  <div class="params-banda">
+    <span><strong>DÍA A</strong> · Fuerza Máxima · 85-95% 1RM · 3-5 reps · Descanso 3-5 min</span>
+    <span><strong>DÍA B</strong> · Fuerza-Hipertrofia · 75-85% 1RM · 6-8 reps · Descanso 2-3 min</span>
+    <span><strong>DÍA C</strong> · Sobrecarga Muscular · 65-75% 1RM · 10-15 reps · Descanso 90s</span>
+  </div>
+</div>
+
+<!-- ── DÍAS ───────────────────────────────────────────────────────────────── -->
+<div class="dias-container">
+
+  <!-- ── DÍA A ── -->
+  <div class="dia-card dia-A">
+    <div class="dia-header">
+      <div class="dia-badge">A</div>
+      <div class="dia-etiqueta">Fuerza Máxima · Básico Pierna</div>
+      <div class="dia-titulo">Sentadilla · Peso Muerto<br>Press Militar · Dominadas</div>
+      <div class="dia-meta">
+        <span class="dia-meta-item">85-95% 1RM</span>
+        <span class="dia-meta-item">3-5 reps</span>
+        <span class="dia-meta-item">Desc. 3-5 min</span>
+        <span class="dia-meta-item">~65 min</span>
+      </div>
+    </div>
+
+    <div class="bloque-header bloque-basicos">[ B ] Básicos — Compuestos protagonistas</div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Sentadilla con Barra (high bar)</div>
+        <div class="ej-nota">PROTAGONISTA · Empujar suelo · Sin valgo · Profundidad controlada</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">5</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">3-5</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3-5 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Peso Muerto Convencional con Barra</div>
+        <div class="ej-nota">Cadena posterior + bisagra · Columna neutra · Latísimo activado</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">4-5</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3-4 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Press Militar con Barra (de pie)</div>
+        <div class="ej-nota">Empuje vertical · Core bracing máximo · Sin extensión lumbar</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">3-5</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3-4 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Dominadas Agarre Prono</div>
+        <div class="ej-nota">Jalón vertical · Retracción escapular antes de tirar · Control excéntrico</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">4-6</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="bloque-header bloque-accesorios">[ A ] Accesorios — Fatiga muscular dirigida</div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Hip Thrust con Barra (pausa 1s)</div>
+        <div class="ej-nota">Glúteo: contracción máxima en extensión · Pelvis neutra · No hiperext. lumbar</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">10</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">90 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Remo en Polea Agarre Neutro (triángulo)</div>
+        <div class="ej-nota">Romboides + trapecio medio · Tirón a ombligo · Codos pegados al cuerpo</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">12-15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6-7</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Elevación Lateral con Mancuernas</div>
+        <div class="ej-nota">Deltoides medio · Codo ligeramente flexionado · Sin trapecio · Trayectoria 45°</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Press Pallof en Polea</div>
+        <div class="ej-nota">Anti-rotación core · Estabilización lumbo-pélvica · Cierre de sesión</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">10</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="dia-footer">
+      <strong>Regla de progresión:</strong> Sube carga solo si RPE real ≤ 7 y técnica impecable en TODAS las reps
+    </div>
+  </div>
+
+  <!-- ── DÍA B ── -->
+  <div class="dia-card dia-B">
+    <div class="dia-header">
+      <div class="dia-badge">B</div>
+      <div class="dia-etiqueta">Fuerza-Hipertrofia · Básico Empuje</div>
+      <div class="dia-titulo">Press Banca · Press Militar<br>Sentadilla Frontal · Remo</div>
+      <div class="dia-meta">
+        <span class="dia-meta-item">75-85% 1RM</span>
+        <span class="dia-meta-item">6-8 reps</span>
+        <span class="dia-meta-item">Desc. 2-3 min</span>
+        <span class="dia-meta-item">~70 min</span>
+      </div>
+    </div>
+
+    <div class="bloque-header bloque-basicos">[ B ] Básicos — Compuestos protagonistas</div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Press Banca con Barra</div>
+        <div class="ej-nota">PROTAGONISTA · Arco controlado · Escápulas retraídas · Codos 60°</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">5</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">5-7</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3-4 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Press Militar Mancuernas (de pie)</div>
+        <div class="ej-nota">Empuje vertical unilateral · Mayor demanda estabilizadora que barra</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">6-8</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">2-3 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Sentadilla Frontal con Barra</div>
+        <div class="ej-nota">Básico pierna complementario · Torso vertical · Codos altos</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">5-7</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Remo con Mancuerna a Una Mano</div>
+        <div class="ej-nota">Jalón horizontal · Rotación escapular completa · Codo pegado al cuerpo</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">6-8/p</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">2 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="bloque-header bloque-accesorios">[ A ] Accesorios — Fatiga muscular dirigida</div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Contractor Pecho en Máquina (Pec Deck)</div>
+        <div class="ej-nota">Contracción máxima en aducción · Énfasis pectoral medio e interno</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">12-15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6-7</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Remo en Polea Agarre Neutro (triángulo)</div>
+        <div class="ej-nota">Romboides + trapecio medio · Tirón a ombligo · Retracción escapular</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">12-15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6-7</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Extensión de Cuádriceps en Máquina</div>
+        <div class="ej-nota">Aislamiento cuádriceps · Arco completo controlado · RPE moderado</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">12-15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6-7</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Curl Femoral en Máquina (tumbado)</div>
+        <div class="ej-nota">Isquio · Excéntrico 3-4s · Compensa el cuádriceps · Control total en bajada</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">12</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">75 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="dia-footer">
+      <strong>Regla de progresión:</strong> Sube carga solo si RPE real ≤ 7 y técnica impecable en TODAS las reps
+    </div>
+  </div>
+
+  <!-- ── DÍA C ── -->
+  <div class="dia-card dia-C">
+    <div class="dia-header">
+      <div class="dia-badge">C</div>
+      <div class="dia-etiqueta">Sobrecarga Muscular · Básico Jalón</div>
+      <div class="dia-titulo">Dominadas · Remo Pendlay<br>Press Inclinado · P.M. Rumano</div>
+      <div class="dia-meta">
+        <span class="dia-meta-item">65-75% 1RM</span>
+        <span class="dia-meta-item">10-15 reps</span>
+        <span class="dia-meta-item">Desc. 90s</span>
+        <span class="dia-meta-item">~70 min</span>
+      </div>
+    </div>
+
+    <div class="bloque-header bloque-basicos">[ B ] Básicos — Compuestos protagonistas</div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Dominadas Lastradas / Agarre Supino</div>
+        <div class="ej-nota">PROTAGONISTA · Retracción + depresión escapular · Control excéntrico</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">6-8</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7-8</div><div class="ej-descanso">3 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Remo con Barra Pendlay</div>
+        <div class="ej-nota">Jalón horizontal compuesto · Sin inercia lumbar · Tira hacia ombligo</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">8-10</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">2-3 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Press Banca Inclinado con Barra</div>
+        <div class="ej-nota">Empuje inclinado · 30-45° · Escápulas fijas · Volumen acumulado</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">8-10</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">2 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio basico">
+      <div class="ej-tipo">B</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Peso Muerto Rumano con Barra</div>
+        <div class="ej-nota">Bisagra pierna · Isquio como freno activo · Tensión excéntrica máxima</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">4</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">10-12</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">2 min</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="bloque-header bloque-accesorios">[ A ] Accesorios — Fatiga muscular dirigida</div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Remo en Polea Agarre Neutro (de pie)</div>
+        <div class="ej-nota">Romboides + dorsal · Codo al cuerpo · Énfasis en retracción final</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6-7</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Elevación Lateral en Polea (unilateral)</div>
+        <div class="ej-nota">Deltoides medio · Mayor tensión en el estiramiento que con mancuerna</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">15/p</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Contractor Pecho en Polea (cruce bajo)</div>
+        <div class="ej-nota">Aducción + flexión · Contracción máxima · Énfasis pectoral inferior</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6-7</div><div class="ej-descanso">60 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Hip Thrust con Barra (series altas)</div>
+        <div class="ej-nota">Glúteo acumulación metabólica · Pausa 1s en extensión · Pelvis neutra</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">15</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 7</div><div class="ej-descanso">75 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="ejercicio accesorio">
+      <div class="ej-tipo">A</div>
+      <div class="ej-info">
+        <div class="ej-nombre">Facepull en Polea (cuerda, altura ojos)</div>
+        <div class="ej-nota">Rotación externa hombro · Manguito rotador · Prevención glenohumeral · Cierre</div>
+      </div>
+      <div class="ej-series"><div class="ej-series-num">3</div><div class="ej-series-label">series</div></div>
+      <div class="ej-reps"><div class="ej-reps-num">20</div><div class="ej-reps-label">reps</div></div>
+      <div class="ej-params"><div class="ej-rpe">RPE 6</div><div class="ej-descanso">45 seg</div></div>
+      <div class="ej-carga-row">
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 1</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 2</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 3</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 4</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 5</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+        <div class="ej-carga-item"><div class="ej-carga-sem">Sem 6</div><div class="ej-carga-input"><input type="text" placeholder="kg"><span class="input-label">·</span><input type="text" placeholder="rpe"></div></div>
+      </div>
+    </div>
+
+    <div class="dia-footer">
+      <strong>Regla de progresión:</strong> Sube carga solo si RPE real ≤ 7 y técnica impecable en TODAS las reps
+    </div>
+  </div>
+
+</div>
+
+<!-- ── LEYENDA RPE ─────────────────────────────────────────────────────────── -->
+<div class="regla-progresion">
+  ✓ SUBE CARGA SOLO CUANDO EL RPE REAL SEA ≤ 7 Y LA TÉCNICA SEA IMPECABLE EN TODAS LAS REPETICIONES
+</div>
+
+<div class="rpe-banda">
+  <div class="rpe-item"><div class="rpe-num">5</div><div class="rpe-desc">Muy fácil<br>mucho margen</div></div>
+  <div class="rpe-item"><div class="rpe-num">6</div><div class="rpe-desc">Fácil<br>margen cómodo</div></div>
+  <div class="rpe-item"><div class="rpe-num">7</div><div class="rpe-desc">Esfuerzo controlado<br>2-3 reps en reserva</div></div>
+  <div class="rpe-item"><div class="rpe-num">8</div><div class="rpe-desc">Duro<br>1 rep en reserva</div></div>
+  <div class="rpe-item"><div class="rpe-num">9</div><div class="rpe-desc">Muy duro<br>límite técnico</div></div>
+  <div class="rpe-item"><div class="rpe-num">10</div><div class="rpe-desc">Fallo<br>no continuar</div></div>
+</div>
+
+</body>
+</html>
